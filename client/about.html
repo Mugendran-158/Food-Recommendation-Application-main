@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seasonal Nutrition Plans</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ec4899;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .recipe-step {
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .recipe-step::before {
+            content: '🍴';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #ec4899;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen items-center justify-center p-4 scroll-smooth">
+
+        <!-- Navigation -->
+        <nav class="fixed top-0 w-full bg-white/80 backdrop-blur-md shadow-md z-50">
+            <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+                <h1 class="text-xl font-bold text-pink-500"> NutriSeason</h1>
+                <div class="space-x-4">
+                    <a href="index.html" class="nav-link text-gray-600 hover:text-pink-500">Home</a>
+                    <a href="about.html" class="nav-link text-gray-600 hover:text-pink-500">About</a>
+                </div>
+            </div>
+        </nav>
+
+
+    <!-- Main Content -->
+    <div id="main-content" class="mt-16 w-full max-w-4xl">
+
+        <!-- Form Container -->
+
+        <!-- Output Container -->
+        <div id="output" class="card w-full max-w-md mt-6 p-4 text-gray-800 hidden mx-auto">
+            <!-- Output content remains the same -->
+        </div>
+
+        <!-- About Section -->
+        <div id="about" class="card w-full max-w-2xl mt-12 p-8 mx-auto">
+            <h2 class="text-3xl font-bold text-pink-500 mb-6">🍎 About Us</h2>
+            
+            <div class="space-y-6 text-gray-700">
+                <p class="text-lg leading-relaxed">
+                    We're passionate about helping you eat seasonally and sustainably. Our platform combines 
+                    traditional wisdom with modern nutrition science to create delicious, healthy meal plans.
+                </p>
+
+                <div class="bg-gradient-to-r from-pink-50 to-red-50 p-6 rounded-xl">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">🌿 Our Mission</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li>Promote seasonal eating</li>
+                        <li>Support local agriculture</li>
+                        <li>Simplify healthy meal planning</li>
+                    </ul>
+                    <br>
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <h3 class="text-xl font-semibold mb-3 text-pink-600">📬 Contact Us</h3>
+                        <p class="text-gray-600">
+                            Have questions or suggestions? We'd love to hear from you!
+                            <br>
+                            📧 <a href="mail:pandiyarajan1204@gmail.com" class="text-pink-500 hover:underline">pandiyarajan1204@gmail.com</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center text-white mt-12 pb-6">
+        <p>Made with ❤️ by Rocket Raja Team!</p>
+        <p class="mt-2 text-sm text-pink-100">© 2023 NutriSeason</p>
+    </footer>
+
+    <script>
+        // Add smooth scroll behavior for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Existing JavaScript functionality remains the same
+    </script>
+</body>
+</html>

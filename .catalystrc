@@ -1,0 +1,30 @@
+{
+  "defaults": {
+    "project": 1,
+    "env": 1
+  },
+  "actives": {
+    "project": 1,
+    "env": 1
+  },
+  "projects": [
+    {
+      "idx": 1,
+      "id": "15582000000009080",
+      "name": "AgeGlow",
+      "domain": {
+        "id": "50025417676",
+        "name": "ageglow-60038687602.development"
+      },
+      "timezone": "Asia/Kolkata",
+      "env": [
+        {
+          "idx": 1,
+          "id": "60038687602",
+          "name": "Development",
+          "type": 3
+        }
+      ]
+    }
+  ]
+}

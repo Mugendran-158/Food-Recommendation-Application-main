@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seasonal Nutrition Plans</title>
+    <link rel="icon" href="plan.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body class="flex flex-col min-h-screen items-center justify-start p-4 relative pb-20">
+    <!-- Header -->
+    <header class="text-center mb-8 mt-4">
+        <h1 class="text-4xl font-bold text-gray-800 mb-2">
+            <i class="fas fa-leaf icon-gradient mr-2"></i>AGE GLOW
+        </h1>
+        <p class="text-gray-600 max-w-2xl">Discover the best foods to eat each season for optimal health and nutrition</p>
+    </header>
+
+    <!-- Main Navigation -->
+    <nav class="flex justify-center mb-8 w-full max-w-3xl">
+        <div class="flex space-x-1 bg-white rounded-xl p-1 shadow-inner">
+            <button id="navRecipes" class="px-4 py-2 rounded-lg font-medium season-highlight active">
+                Seasonal Recipes
+            </button>
+            <button id="navCalendar" class="px-4 py-2 rounded-lg font-medium season-highlight">
+                Produce Calendar
+            </button>
+            <button id="navBenefits" class="px-4 py-2 rounded-lg font-medium season-highlight">
+                Health Benefits
+            </button>
+        </div>
+    </nav>
+
+    <!-- Seasonal Recipes Section (Default View) -->
+    <div id="recipesSection" class="page active-page w-full max-w-4xl">
+        <!-- Form Page -->
+        <div id="formPage" class="page active-page w-full season-card rounded-2xl shadow-xl p-6 text-center">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">
+                <i class="fas fa-utensils icon-gradient mr-2"></i>Find Seasonal Recipes
+            </h2>
+
+            <form id="nutritionForm" class="space-y-6">
+                <!-- Age Selection Button -->
+                <div class="space-y-2 text-left">
+                    <label class="block text-lg font-semibold text-gray-600">
+                        <i class="fas fa-user text-blue-500 mr-2"></i>Select Age Group:
+                    </label>
+                    <select id="ageGroup" class="w-full p-3 border-2 border-gray-200 rounded-xl bg-white focus:border-blue-400 focus:ring-2 focus:ring-blue-200 transition-all">
+                        <option value="under50">Under 50</option>
+                        <option value="50-60">50-60 years</option>
+                        <option value="61-70">61-70 years</option>
+                        <option value="71-80">71-80 years</option>
+                        <option value="81-90">81-90 years</option>
+                        <option value="over90">Over 90 years</option>
+                    </select>
+                </div>
+
+                <!-- Weight Input Button -->
+                <div class="space-y-2 text-left">
+                    <label class="block text-lg font-semibold text-gray-600">
+                        <i class="fas fa-weight text-orange-500 mr-2"></i>Enter Weight (kg):
+                    </label>
+                    <input type="number" id="weight" min="30" max="200" class="w-full p-3 border-2 border-gray-200 rounded-xl bg-white focus:border-blue-400 focus:ring-2 focus:ring-blue-200 transition-all" placeholder="Enter your weight in kg " required>
+                </div>
+
+                <div class="space-y-2 text-left">
+                    <label class="block text-lg font-semibold text-gray-600">
+                        <i class="fas fa-calendar-alt text-emerald-500 mr-2"></i>Choose Season:
+                    </label>
+                    <select id="season" class="w-full p-3 border-2 border-gray-200 rounded-xl bg-white focus:border-blue-400 focus:ring-2 focus:ring-blue-200 transition-all">
+                        <option value="Spring">🌸 Spring (March-May)</option>
+                        <option value="Summer">☀️ Summer (June-August)</option>
+                        <option value="Monsoon">🌧️ Monsoon (September-November)</option>
+                        <option value="Autumn">🍂 Autumn (December-February)</option>
+                        <option value="Winter">❄️ Winter (December-February)</option>
+                    </select>
+                </div>
+
+                <div class="space-y-2 text-left">
+                    <label class="block text-lg font-semibold text-gray-600">
+                        <i class="fas fa-clock text-orange-500 mr-2"></i>Select Meal Time:
+                    </label>
+                    <select id="mealTime" class="w-full p-3 border-2 border-gray-200 rounded-xl bg-white focus:border-blue-400 focus:ring-2 focus:ring-blue-200 transition-all">
+                        <option value="breakfast">🍳 Breakfast</option>
+                        <option value="lunch">🥗 Lunch</option>
+                        <option value="dinner">🍽️ Dinner</option>
+                    </select>
+                </div>
+
+                <button type="button" id="nextBtn1" class="w-full bg-gradient-to-r from-emerald-500 to-cyan-600 text-white font-bold py-3 px-6 rounded-xl shadow-lg hover:scale-[1.02] transition-transform duration-300">
+                    Show Seasonal Meals <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+            </form>
+        </div>
+
+        <!-- Meal Selection Page -->
+        <div id="mealPage" class="page w-full season-card rounded-xl shadow-xl mt-6 p-5 text-gray-800">
+            <button id="backBtn1" class="mb-4 text-gray-600 hover:text-gray-800 flex items-center">
+                <i class="fas fa-arrow-left mr-2"></i>Back
+            </button>
+            <h2 class="text-xl font-semibold text-gray-700 mb-4">
+                <i class="fas fa-list-ul text-blue-500 mr-2"></i>Choose Your Seasonal Meal:
+            </h2>
+            <div id="seasonalInfo" class="bg-blue-50 p-3 rounded-lg mb-4 text-sm text-blue-800 hidden">
+                <i class="fas fa-info-circle mr-2"></i><span id="seasonalInfoText"></span>
+            </div>
+            <div id="mealOptions" class="space-y-3"></div>
+            <button id="nextBtn2" class="mt-6 bg-gradient-to-r from-amber-400 to-orange-500 text-white py-3 px-6 rounded-xl w-full hover:scale-[1.02] transition-all hidden">
+                Show Recipe Details<i class="fas fa-arrow-right ml-2"></i>
+            </button>
+        </div>
+
+        <!-- Description Page -->
+        <div id="descPage" class="page w-full season-card rounded-xl shadow-xl mt-6 p-5 text-gray-800">
+            <button id="backBtn2" class="mb-4 text-gray-600 hover:text-gray-800 flex items-center">
+                <i class="fas fa-arrow-left mr-2"></i>Back
+            </button>
+            <div id="description" class="bg-gray-50 p-4 rounded-lg"></div>
+            <div class="flex space-x-3 mt-6">
+                <button id="showNutritionBtn" class="flex-1 bg-gradient-to-r from-purple-500 to-indigo-600 text-white py-3 px-6 rounded-xl hover:scale-[1.02] transition-all">
+                    Nutrition Facts <i class="fas fa-apple-alt ml-2"></i>
+                </button>
+                <button id="showIngredientsBtn" class="flex-1 bg-gradient-to-r from-green-500 to-emerald-600 text-white py-3 px-6 rounded-xl hover:scale-[1.02] transition-all">
+                    Ingredients <i class="fas fa-carrot ml-2"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Nutrition Facts Page -->
+        <div id="nutritionPage" class="page w-full season-card rounded-xl shadow-xl mt-6 p-5 text-gray-800">
+            <button id="backBtn3" class="mb-4 text-gray-600 hover:text-gray-800 flex items-center">
+                <i class="fas fa-arrow-left mr-2"></i>Back
+            </button>
+            <h2 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+                <i class="fas fa-apple-alt text-purple-500 mr-2"></i>
+                Nutritional Information
+            </h2>
+            <div id="nutritionFacts" class="bg-gray-50 p-4 rounded-lg">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="nutrition-fact">
+                        <span>Calories</span>
+                        <span id="calories">-</span>
+                    </div>
+                    <div class="nutrition-fact">
+                        <span>Protein</span>
+                        <span id="protein">-</span>
+                    </div>
+                    <div class="nutrition-fact">
+                        <span>Carbs</span>
+                        <span id="carbs">-</span>
+                    </div>
+                    <div class="nutrition-fact">
+                        <span>Fiber</span>
+                        <span id="fiber">-</span>
+                    </div>
+                    <div class="nutrition-fact">
+                        <span>Fat</span>
+                        <span id="fat">-</span>
+                    </div>
+                    <div class="nutrition-fact">
+                        <span>Vitamins</span>
+                        <span id="vitamins">-</span>
+                    </div>
+                </div>
+                <div class="mt-4 pt-4 border-t border-gray-200">
+                    <h4 class="font-semibold mb-2">Key Benefits:</h4>
+                    <ul id="benefitsList" class="list-disc list-inside space-y-1"></ul>
+                </div>
+            </div>
+            <button id="toIngredientsBtn" class="mt-6 bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-3 px-6 rounded-xl w-full hover:scale-[1.02] transition-all">
+                View Ingredients <i class="fas fa-arrow-right ml-2"></i>
+            </button>
+        </div>
+
+        <!-- Ingredients Page -->
+        <div id="ingredientsPage" class="page w-full season-card rounded-xl shadow-xl mt-6 p-5 text-gray-800">
+            <button id="backBtn4" class="mb-4 text-gray-600 hover:text-gray-800 flex items-center">
+                <i class="fas fa-arrow-left mr-2"></i>Back
+            </button>
+            <h2 class="text-xl font-semibold text-gray-700 mb-4 flex items-center">
+                <i class="fas fa-shopping-basket text-purple-500 mr-2"></i>
+                Select Ingredients to Order
+                <span id="selectedCount" class="selected-count hidden">0</span>
+            </h2>
+            <div id="seasonalProduceTip" class="bg-green-50 p-3 rounded-lg mb-4 text-sm text-green-800 hidden">
+                <i class="fas fa-lightbulb mr-2"></i><span id="seasonalProduceText">Tip: Ingredients marked with ★ are currently in season!</span>
+            </div>
+            <div id="ingredientsList" class="bg-gray-50 p-4 rounded-lg max-h-96 overflow-y-auto"></div>
+            <button id="orderIngredientsBtn" class="mt-6 bg-gradient-to-r from-purple-500 to-pink-600 text-white py-3 px-6 rounded-xl w-full hover:scale-[1.02] transition-all disabled:opacity-50" disabled>
+                Order Selected (<span id="orderCount">0</span>) <i class="fas fa-cart-plus ml-2"></i>
+            </button>
+        </div>
+
+        <!-- Order Confirmation Page -->
+        <div id="orderPage" class="page w-full season-card rounded-xl shadow-xl mt-6 p-5 text-gray-800">
+            <button id="backBtn5" class="mb-4 text-gray-600 hover:text-gray-800 flex items-center">
+                <i class="fas fa-arrow-left mr-2"></i>Back
+            </button>
+            <h2 class="text-xl font-semibold text-gray-700 mb-4">
+                <i class="fas fa-check-circle text-green-500 mr-2"></i>Confirm Your Order
+            </h2>
+            <div class="bg-gray-50 p-4 rounded-lg mb-4">
+                <p class="font-semibold">Meal: <span id="orderMealName"></span></p>
+                <p class="text-sm text-gray-600 mt-2">Selected Ingredients:</p>
+                <ul id="orderIngredientsSelected" class="list-disc list-inside mt-2 space-y-1"></ul>
+                <div class="mt-4 pt-4 border-t border-gray-200">
+                    <p class="font-semibold">Total Items: <span id="totalItems">0</span></p>
+                    <p class="font-semibold mt-2">Estimated Cost: ₹<span id="estimatedCost">0</span></p>
+                </div>
+            </div>
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700 mb-1">Delivery Address:</label>
+                <textarea id="deliveryAddress" rows="3" class="w-full p-2 border rounded-md" placeholder="Enter your address"></textarea>
+            </div>
+            <button id="confirmOrderBtn" class="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-3 px-6 rounded-xl hover:scale-[1.02] transition-all">
+                Confirm Order <i class="fas fa-check ml-2"></i>
+            </button>
+        </div>
+
+        <!-- Success Page -->
+        <div id="successPage" class="page w-full season-card rounded-xl shadow-xl mt-6 p-5 text-center">
+            <div class="text-6xl text-green-500 mb-4">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Order Successful!</h2>
+            <p class="text-gray-600 mb-6">Your seasonal meal ingredients are on their way! 🎉</p>
+            <div class="bg-blue-50 p-4 rounded-lg mb-6 text-left">
+                <p class="font-semibold">Order Summary:</p>
+                <p id="orderSummary" class="text-sm mt-2"></p>
+            </div>
+            <button id="homeBtn" class="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-3 px-6 rounded-xl hover:scale-[1.02] transition-all">
+                Back to Home <i class="fas fa-home ml-2"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Produce Calendar Section -->
+    <div id="calendarSection" class="page w-full max-w-4xl">
+        <div class="season-card rounded-2xl shadow-xl p-6">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                <i class="fas fa-calendar-alt icon-gradient mr-2"></i>Seasonal Produce Calendar
+            </h2>
+            
+            <!-- Daily Calendar View -->
+            <div class="mb-8">
+                <h3 class="text-lg font-semibold mb-4">Daily View</h3>
+                <div id="currentSeasonDisplay" class="current-season-display">
+                    <i class="fas fa-calendar-day mr-2"></i>
+                    <span id="todayDate"></span> - <span id="currentSeason"></span>
+                </div>
+                <div id="dailyCalendar" class="daily-calendar"></div>
+                <div id="todaysProduce" class="bg-green-50 p-4 rounded-lg">
+                    <h4 class="font-semibold mb-2">Today's Seasonal Produce:</h4>
+                    <div id="todaysProduceList" class="flex flex-wrap gap-2 mt-2"></div>
+                </div>
+            </div>
+            
+            <!-- Monthly Calendar View -->
+            <div class="mb-6">
+                <h3 class="text-lg font-semibold mb-4">Monthly View</h3>
+                <div class="flex justify-center space-x-2 mb-4">
+                    <button id="showSpring" class="px-4 py-2 rounded-lg font-medium bg-green-100 text-green-800 season-highlight active">
+                        Spring
+                    </button>
+                    <button id="showSummer" class="px-4 py-2 rounded-lg font-medium bg-yellow-100 text-yellow-800 season-highlight">
+                        Summer
+                    </button>
+                    <button id="showMonsoon" class="px-4 py-2 rounded-lg font-medium bg-blue-100 text-blue-800 season-highlight">
+                        Monsoon
+                    </button>
+                    <button id="showAutumn" class="px-4 py-2 rounded-lg font-medium bg-orange-100 text-orange-800 season-highlight">
+                        Autumn
+                    </button>
+                    <button id="showWinter" class="px-4 py-2 rounded-lg font-medium bg-gray-100 text-gray-800 season-highlight">
+                        Winter
+                    </button>
+                </div>
+                
+                <div id="seasonalCalendar" class="seasonal-calendar"></div>
+            </div>
+            
+            <div id="produceDetails" class="bg-gray-50 p-4 rounded-lg">
+                <h3 class="font-bold mb-3">Seasonal Produce Details</h3>
+                <div id="produceList" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Health Benefits Section -->
+    <div id="benefitsSection" class="page w-full max-w-4xl">
+        <div class="season-card rounded-2xl shadow-xl p-6">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                <i class="fas fa-heartbeat icon-gradient mr-2"></i>Health Benefits of Seasonal Eating
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <h3 class="font-bold text-lg text-emerald-600 mb-3">Nutritional Advantages</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-emerald-500 mt-1 mr-2"></i>
+                            Higher nutrient content as produce is harvested at peak ripeness
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-emerald-500 mt-1 mr-2"></i>
+                            More antioxidants in seasonal fruits and vegetables
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-emerald-500 mt-1 mr-2"></i>
+                            Better flavor and texture when eaten in season
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <h3 class="font-bold text-lg text-blue-600 mb-3">Environmental Benefits</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-leaf text-blue-500 mt-1 mr-2"></i>
+                            Reduced carbon footprint from local sourcing
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-leaf text-blue-500 mt-1 mr-2"></i>
+                            Less energy used for storage and transportation
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-leaf text-blue-500 mt-1 mr-2"></i>
+                            Supports local farmers and biodiversity
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <h3 class="font-bold text-lg text-purple-600 mb-3">Economic Advantages</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-rupee-sign text-purple-500 mt-1 mr-2"></i>
+                            Lower prices due to abundant supply
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-rupee-sign text-purple-500 mt-1 mr-2"></i>
+                            Money stays within the local economy
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-rupee-sign text-purple-500 mt-1 mr-2"></i>
+                            Reduces food waste by aligning with natural cycles
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <h3 class="font-bold text-lg text-amber-600 mb-3">Seasonal Eating Tips</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-lightbulb text-amber-500 mt-1 mr-2"></i>
+                            Visit local farmers markets for fresh produce
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-lightbulb text-amber-500 mt-1 mr-2"></i>
+                            Preserve seasonal foods by freezing or canning
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-lightbulb text-amber-500 mt-1 mr-2"></i>
+                            Plan meals around what's in season
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="mt-8 bg-blue-50 p-4 rounded-lg">
+                <h3 class="font-bold text-lg text-blue-800 mb-2">Did You Know?</h3>
+                <p>Eating seasonally can provide up to 40% more nutrients than out-of-season produce that's been stored or transported long distances.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Section (Hidden by default) -->
+    <div id="cartSection" class="page w-full max-w-4xl">
+        <div class="season-card rounded-2xl shadow-xl p-6">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                <i class="fas fa-shopping-cart icon-gradient mr-2"></i>Your Cart
+            </h2>
+            
+            <div id="cartItems" class="mb-6">
+                <p class="text-center text-gray-500 py-8">Your cart is empty</p>
+            </div>
+            
+            <div id="cartSummary" class="bg-gray-50 p-4 rounded-lg hidden">
+                <div class="flex justify-between mb-2">
+                    <span>Subtotal:</span>
+                    <span id="cartSubtotal">₹0</span>
+                </div>
+                <div class="flex justify-between mb-2">
+                    <span>Delivery:</span>
+                    <span id="cartDelivery">₹0</span>
+                </div>
+                <div class="flex justify-between font-bold text-lg">
+                    <span>Total:</span>
+                    <span id="cartTotal">₹0</span>
+                </div>
+            </div>
+            
+            <button id="checkoutBtn" class="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-3 px-6 rounded-xl mt-6 hover:scale-[1.02] transition-all hidden">
+                Proceed to Checkout <i class="fas fa-arrow-right ml-2"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <a href="#" id="bottomHome" class="bottom-nav-btn active">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="#" id="bottomCalendar" class="bottom-nav-btn">
+            <i class="fas fa-calendar-day"></i>
+            <span>Calendar</span>
+        </a>
+        <a href="#" id="bottomCart" class="bottom-nav-btn">
+            <div class="nav-btn-wrapper">
+                <i class="fas fa-shopping-cart"></i>
+                <span id="cartBadge" class="badge hidden">0</span>
+            </div>
+            <span>Cart</span>
+        </a>
+    </div>
+    <script src="main.js"></script>
+
+</body>
+</html>
